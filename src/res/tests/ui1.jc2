@@ -1,0 +1,21 @@
+use uilib;
+
+void main ()
+{
+string[] list=new string[2];
+list[0]="Yes";
+list[1]="No";
+
+  while(choiceList("Exit?",list)!=0)
+{
+  string s = textbox ("Username", "");
+  showOutputForm();
+  println ("name:" + s);
+  sleep (1000);
+  s = textbox ("Password", "");
+  showOutputForm();
+  println ("pass:" + s);
+  sleep(1000);
+  alert ("Info", "Thank you");
+  }
+}

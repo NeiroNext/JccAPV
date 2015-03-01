@@ -1,0 +1,17 @@
+//#define HELLO "Hello, world"
+//#include <graphlib>
+
+void main()
+{
+int i=0;
+++i;
+println("i="+i);
+
+println("i="+(--i));
+println("i="+(i+=20));
+for(i=-1;i<4;++i)
+{
+println("i = "+i);
+}
+println(HELLO);
+}

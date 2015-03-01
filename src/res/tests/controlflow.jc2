@@ -1,0 +1,29 @@
+use stdlib;
+
+void main ()
+{
+ int a = random()%100;
+ if (a > 50)
+  println ("1");
+ else
+  println ("0");
+
+ int i = 0;
+ int sum = 0;
+ while (i < 100)
+ {
+  sum = sum + i;
+  i=i+1;
+ }
+ println ("sum from 1 to 100 = " + sum);
+
+ while(true)
+ {
+   int n = random()%10;
+   if (n > 5)
+   {
+    println ("n=" + n);
+    break;
+   }
+ }
+}

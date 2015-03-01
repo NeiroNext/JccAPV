@@ -1,0 +1,9 @@
+use stdlib;
+use utillib;
+
+void main(){
+  string pass = "123456";
+  println("befor md5 calculation: "+pass);
+  pass = new MD5().calculate(pass);
+  println("after calculating: "+pass);
+}

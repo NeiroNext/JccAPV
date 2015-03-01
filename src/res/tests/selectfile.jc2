@@ -1,0 +1,28 @@
+use filelib;
+use uilib;
+
+void main ()
+{
+ string path="/";
+ bool open=false;
+ while (true)
+ {
+  string[] list=dirlist(path);
+  int ch=choiceList(path, list);
+  if (ch == -1)
+   break;
+  else
+  {
+    path=path+list[ch];
+    if (!strEndsWith(list[ch],"/"))
+    {
+      open=true;
+      break;
+    }
+  }
+ }
+ if (open)
+  alert("path", path);
+ else
+  alert("info", "no file specified");
+}

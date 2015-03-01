@@ -1,0 +1,76 @@
+use graphlib;
+use filelib;
+use uilib;
+use medialib;
+
+//file: File.jcc.txt
+//author P@bloid
+//version 3.0.0
+
+string selectFile(string s){
+string path=s;
+string[] d=dirlist(path);
+while(strEndsWith(path,"/")&&path.length>0)
+{
+int c=choiceList(path,d);
+if((c<0)&&(path.length==1))return "";
+if(c<0)break;
+path=path+d[c];
+d=dirlist(path);
+}
+return path;
+}
+void main ()
+{
+string s="/";
+while(s.length>0)
+{
+  s=selectFile("/");
+  if(strEndsWith(s,".jpg")||strEndsWith(s,".png")||strEndsWith(s,".gif"))
+{
+Canvas c=new Canvas();
+c.fullscreen(true);
+Graphics g=c.getGraphics();
+c.show();
+Image img;
+if(getProperty("microedition.io.file.FileConnection.version").length>0)
+img=new Image(fileOpenInputStream(s));
+else
+img=loadImageResource(s);
+g.drawImage(img,c.getWidth()/2,c.getHeight()/2,Graphics.VCENTER|Graphics.HCENTER);
+c.repaint();
+while(c.getKeyStates()==0)gc();
+}
+else if(strEndsWith(s,".mid")||strEndsWith(s,".mp3")||strEndsWith(s,".wav"))
+{
+Canvas c=new Canvas();
+c.fullscreen(true);
+Graphics g=c.getGraphics();
+c.show();
+g.drawString("Playing: "+s,2,2,20);
+g.drawString("Any key to stop",2,22,20);
+Player p=createPlayer(s);
+p.start();
+c.repaint();
+while(c.getKeyStates()==0)gc();
+p.stop();
+p.close();
+}
+else if(strEndsWith(s,".txt"))
+{
+InputStream is=fileOpenInputStream(s);
+string st="";
+int ch=is.readByte();
+while(ch!=0-1)
+{
+if(ch>128)
+ch=ch+848;
+st=st+(char)ch;
+ch=is.readByte();
+}
+showOutputForm();
+print(st);
+break;
+}
+}
+}

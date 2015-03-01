@@ -1,0 +1,25 @@
+use stdlib;
+
+void callback t1(Object[] args)
+{
+ for (int i = 0; i < 5; i++)
+ {
+   print("t1");
+   yield();
+ }
+}
+
+void callback t2(Object[] args)
+{
+ for (int i = 0; i < 5; i++)
+ {
+   print("t2");
+   yield();
+ }
+}
+
+void main ()
+{
+  startThread (t1);
+  startThread (t2);
+}

@@ -1,0 +1,6 @@
+use stdlib;
+use vmlib;
+
+void main(){
+	println("Hello New Jcc :)");
+}

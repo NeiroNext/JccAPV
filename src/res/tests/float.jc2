@@ -1,0 +1,9 @@
+use stdlib;
+
+void main ()
+{
+  float f = 10.5f;
+  float f2 = f-2.0;
+  println ("float:" + f2);
+  println ((string)(int)f2);
+}

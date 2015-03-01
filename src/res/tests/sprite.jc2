@@ -1,0 +1,23 @@
+use filelib;
+use iolib;
+use graphlib;
+
+void main ()
+{
+  Image img = loadImageResource ("/forest.png");
+  Sprite spr = new Sprite (img);
+  //spr.defineReferencePixel(img.getHeight(), 0);
+  //spr.setTransform (Sprite.TRANS_ROT270);
+
+  Canvas canv = new Canvas ();
+  canv.fullscreen (true);
+  canv.show();
+  //spr.setRefPixelPosition (canv.getWidth()/2, canv.getHeight()/2);
+  Graphics g;
+  while (canv.getKeyStates()==0)
+  {
+    g = canv.getGraphics ();
+    spr.paint (g);
+    canv.repaint ();
+  }
+}

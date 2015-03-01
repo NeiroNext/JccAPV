@@ -1,0 +1,17 @@
+use stdlib;
+use utillib;
+
+
+
+void main ()
+{
+ Hashtable h=new Hashtable();
+ h.put((Object)"1", (Object)"one");
+ h.put((Object)"2", (Object)"two");
+ h.put((Object)"www", (Object)"site");
+ println((string)h.get((Object)"2"));
+ h.delete((Object)"1");
+ println("size: "+h.size());
+  if(h.contains((Object)"site"))
+   println("It's contains!");
+}

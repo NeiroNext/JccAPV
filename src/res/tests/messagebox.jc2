@@ -1,0 +1,8 @@
+use stdlib;
+use uilib;
+
+void main()
+{
+ int n = messagebox("title", "OK", "Cancel", "text");
+ print ("" + n + "\n");
+}

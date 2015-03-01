@@ -1,0 +1,35 @@
+use medialib;
+use controllib;
+use graphlib;
+use stdlib;
+use filelib;
+use iolib;
+
+void main ()
+{
+  Canvas c = new Canvas();
+  Graphics g = c.getGraphics();
+  c.show();
+
+  File f=fileOpen("/c:/other/test.png", File.WRITE);
+  OutputStream os=f.openOutputStream();
+  byte[] b;
+  
+  Player p = new Player();
+  VideoControl vc=new VideoControl();
+  p.open("capture://video");
+  p.realize();
+  p.getControl(vc);
+  vc.initDisplay(c);
+  vc.setDisplayPos(5, 5);
+  vc.setDisplaySize(c.getWidth()-10, c.getWidth()-10);
+  //vc.setFullScreen(true);
+  vc.show(true);
+  p.start();
+    while(c.getKey() != 53)
+       sleep(300);
+  b=vc.getSnapshot();
+  os.write(b, 0, b.length);
+  f.close();
+  p.close();
+}

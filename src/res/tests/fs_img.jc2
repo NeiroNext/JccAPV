@@ -1,0 +1,37 @@
+use graphlib;
+use stdlib;
+use iolib;
+
+
+
+void main ()
+{
+
+  Image bg = new Image (fileOpenInputStream("/disk/1.jpg"));
+
+  Canvas canvas = new Canvas ();
+  canvas.fullscreen(true);
+  canvas.show ();
+  Graphics g;
+  int w = canvas.getWidth ();
+  int h = canvas.getHeight ();
+
+  int x = 0;
+  int imgw = bg.getWidth();
+
+  while (true)
+  {
+    x--;
+
+    g = canvas.getGraphics ();
+    g.setColor (0x000000);
+    g.fillRect (0, 0, w, h);
+    g.setColor (0xff0000);
+    g.drawImage (bg, x, h, Graphics.LEFT|Graphics.BOTTOM);
+    g.drawImage (bg, x+imgw, h, Graphics.LEFT|Graphics.BOTTOM);
+    if (x <= -imgw)
+     x = 0;
+    canvas.repaint ();
+    yield();
+  }
+}

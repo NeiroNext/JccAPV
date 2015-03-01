@@ -1,0 +1,14 @@
+use stdlib;
+use utillib;
+
+
+
+void main ()
+{
+ Base64 b=new Base64();
+ string str="Hello World!";
+ str=b.encode(str);
+ println(str);
+ str=b.decode(str);
+ println(str);
+}

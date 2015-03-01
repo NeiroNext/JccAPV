@@ -1,0 +1,59 @@
+use graphlib;
+use mathlib;
+use stdlib;
+
+void main ()
+{
+  Canvas c = new Canvas ();
+  c.show();
+  c.fullscreen(true);
+  int w=c.getWidth();
+  int h=c.getHeight();
+  int cD=(min(w,h)-10);
+  int cR=cD/2;
+  int secLine = cR-4;
+  int minLine=secLine*2/3;
+  int hourLine=secLine/2;
+  int cX=w/2-cD/2;
+  int cY=h/2-cD/2;
+  Graphics g;
+  while(c.getKeyStates()==0)
+  {
+
+    int angle = getTime(Time.SECOND)*6-90;
+    float secAngle = (float)(toRadians((double)angle));
+    angle = getTime(Time.MINUTE)*6-90;
+    float minAngle = (float)(toRadians((double)angle));
+    angle = getTime(Time.HOUR_OF_DAY)*15-180;
+    float hourAngle = (float)(toRadians((double)angle));
+    
+
+    g=c.getGraphics();
+    g.setColor(0x000000);
+    g.fillRect(0,0,w,h);
+    g.setColor(0xffffff);
+    g.drawArc (cX,cY,cD,cD,0,360);
+
+    g.setColor (0x0000ff);
+    int sy = (int)(sin(hourAngle)*((float)hourLine));
+    int sx = (int)(cos(hourAngle)*((float)hourLine));
+    g.drawLine(w/2,h/2,w/2+sx,h/2+sy);
+
+    g.setColor (0x00ff00);
+    sy = (int)(sin(minAngle)*((float)minLine));
+    sx = (int)(cos(minAngle)*((float)minLine));
+    g.drawLine(w/2,h/2,w/2+sx,h/2+sy);
+
+    g.setColor (0xff0000);
+    sy = (int)(sin(secAngle)*(float)secLine);
+    sx = (int)(cos(secAngle)*(float)secLine);
+    g.drawLine(w/2,h/2,w/2+sx,h/2+sy);
+
+    g.setColor (0xffffff);
+    g.drawString(""+getTimeString(),1,c.getHeight()-1,Graphics.LEFT|Graphics.BOTTOM);
+    g.drawString(""+getTime(Time.SECOND), 0, 50, 20);
+
+    c.repaint();
+    sleep(1000);
+  }
+}

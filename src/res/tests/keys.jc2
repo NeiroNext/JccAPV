@@ -1,0 +1,32 @@
+use stdlib;
+use graphlib;
+
+string s;
+bool bRun;
+
+void callback onkey (int key, Object display)
+{
+  s = "key: " + key;
+  if (key == Canvas.KEY_STAR)
+   bRun = false;
+}
+
+void main ()
+{
+  s = "key: ";
+  bRun = true;
+
+  onKeyPressed(onkey);
+  Canvas canvas = new Canvas ();
+  canvas.show();
+  while (bRun)
+  {
+    Graphics g = canvas.getGraphics();
+    g.setColor (0);
+    g.fillRect (0, 0, canvas.getWidth(), canvas.getHeight());
+    g.setColor (0xffffff);
+    g.drawString(s, 10, 10, Graphics.LEFT|Graphics.TOP);
+    canvas.repaint();
+    yield();
+  }
+}

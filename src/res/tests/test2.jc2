@@ -1,0 +1,10 @@
+use stdlib;
+
+void main ()
+{
+int time=time();
+  while (time()-time<=1000)
+  {
+    print (""+(1+random()%8));
+  }
+}

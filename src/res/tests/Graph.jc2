@@ -1,0 +1,56 @@
+use graphlib;
+use mathlib;
+
+float f(float x)
+{
+return x*x+3.*x+2.;
+}
+
+void main ()
+{
+  Canvas canvas = new Canvas ();
+  canvas.fullscreen(true);
+  canvas.show ();
+  Graphics sg=canvas.getGraphics();;
+  int w = canvas.getWidth ();
+  int h = canvas.getHeight ();
+  Image i=new Image(w,h);
+  Graphics g=i.getGraphics();
+ float m=10.;
+ int n=(int)m;
+ g.setColor(0xd2d2d2);
+ int x=1;
+ while(((w/2+x*n)<w)&&((w/2-x*n)>0))
+ {
+ g.drawLine(w/2+x*n,0,w/2+x*n,h);
+ g.drawLine(w/2-x*n,0,w/2-x*n,h);
+ ++x;
+ } 
+ int y=1;
+ while(((h/2+y*n)<h)&&((h/2-y*n)>0))
+ {
+ g.drawLine(0,h/2+y*n,w,h/2+y*n);
+ g.drawLine(0,h/2-y*n,w,h/2-y*n);
+ ++y;
+ }
+ g.setColor(0x969696);
+ g.drawLine(w/2,0,w/2,h);
+ g.drawLine(0,h/2,w,h/2);
+ g.setColor(0xff0000);
+ 
+ for(x=0;x<w;++x)
+ {
+ float fx1=(float)(x-1-w/2)/m;
+ float fx2=(float)(x-w/2)/m;
+ float fy1=f(fx1);
+ float fy2=f(fx2);
+ float y1=(float)(h/2)-fy1*m;
+ float y2=(float)(h/2)-fy2*m;
+ g.drawLine(x-1,(int)y1,x,(int)y2);
+ canvas.repaint();
+ }
+ sg.drawImage(i,0,0,20);
+ i.saveBmpStream(fileOpenOutputStream("/e:/picture/"+abs(time()&0xffff)+".bmp"));
+ while(canvas.keyPressed()==0)
+ yield();
+}

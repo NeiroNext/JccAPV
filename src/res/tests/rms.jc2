@@ -1,0 +1,11 @@
+use rmslib;
+
+void main ()
+{
+byte[] data=strGetBytes("J.Peter - Genius");
+  int id=rmsWrite("P@bloid",data);
+  println("done");
+  byte[] dt=rmsRead("P@bloid",id);
+  println(byteToStr(dt));
+  deleteRecord("P@bloid",id);
+}

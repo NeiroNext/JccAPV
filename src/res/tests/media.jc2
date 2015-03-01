@@ -1,0 +1,13 @@
+use stdlib;
+use medialib;
+
+
+void main ()
+{
+ Player p=new Player();
+ string str="file:///mfs/01.mp3";
+ p.open(str);
+ p.start();
+ sleep(10000);
+ p.close();
+}

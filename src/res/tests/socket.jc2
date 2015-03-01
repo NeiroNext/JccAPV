@@ -1,0 +1,29 @@
+use stdlib;
+use uilib;
+use iolib;
+
+void main()
+{
+ string url = editform("enter url", "OK", "Cancel", "ya.ru", 32, TextField.ANY);
+ if(url == null)
+  return;
+ Socket sock = socketOpen(url+":80");
+ if (sock == null)
+ {
+  print(getLastError()+"\n");
+  return;
+ }
+ OutputStream os = sock.openOutputStream();
+ byte[] req = "GET /index.html HTTP/1.0\r\n\r\n".getBytes();
+ os.write(req, 0, req.length);
+ InputStream is = sock.openInputStream();
+ string ans = "";
+ while(true)
+ {
+  int c = is.read();
+  if (c == (int)'\r' || c == -1)
+   break;
+  ans += (char)c;
+ }
+ print (ans + "\n");
+}

@@ -1,0 +1,25 @@
+use graphlib;
+use stdlib;
+
+void main ()
+{
+  Canvas c = new Canvas ();
+  c.show();
+  c.fullscreen(true);
+  int w=c.getWidth();
+  int h=c.getHeight();
+  Graphics g=c.getGraphics();
+  while(c.getKeyStates()==0)
+  {
+    g.setColor(0x000000);
+    g.fillRect(0,0,w,h);
+    g.setColor(0x2020ff);
+    string s = ""+getTime(Time.HOUR_OF_DAY);
+    s = s + ":" + getTime(Time.MINUTE);
+    s = s + ":" + getTime(Time.SECOND);
+    g.drawString(s,5,5,Graphics.LEFT|Graphics.TOP);
+    g.drawString(""+time(),5,5+g.stringHeight(),Graphics.LEFT|Graphics.TOP);
+    g.drawString(""+freeMemory(),5,5+2*g.stringHeight(),Graphics.LEFT|Graphics.TOP);
+    c.repaint();
+  }
+}

@@ -1,0 +1,34 @@
+use medialib;
+use controllib;
+use graphlib;
+use stdlib;
+
+
+
+void main ()
+{
+  Canvas c = new Canvas();
+  Graphics g = c.getGraphics();
+  c.show();
+  
+  Player p = new Player();
+  VideoControl vc=new VideoControl();
+  p.open("file:///mfs/01.mpeg");
+  p.realize();
+  p.getControl(vc);
+  vc.initDisplay(c);
+  vc.setDisplayPos(20, 20);
+  vc.setDisplaySize(100, 100);
+  //vc.setFullScreen(true);
+  vc.show(true);
+  p.start();
+  sleep(10000);
+  println("DisplayWidth: "+vc.getDisplayWidth());
+  println("DisplayHeight: "+vc.getDisplayHeight());
+  println("DisplayX: "+vc.getDisplayY());
+  println("DisplayY: "+vc.getDisplayX());
+  println("SourceWidth: "+vc.getSourceWidth());
+  println("SuurceHeight: "+vc.getSourceHeight());
+  println(getProperty("video.snapshot.encodings"));
+  p.close();
+}

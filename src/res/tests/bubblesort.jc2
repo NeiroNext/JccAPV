@@ -1,0 +1,39 @@
+use stdlib;
+
+void print_arr (int[] a)
+{
+    for (int i=0; i < a.length; i++)
+        print("" + a[i]);
+}
+
+void bubblesort(int[] a)
+{
+ int n = a.length;
+ int tmp;
+ for (int i=n-1; i>0; i--)
+ {
+  for(int j=0; j < i; j++)
+  {
+   if (a[j] > a[j+1])
+   {
+    tmp = a[j];
+    a[j] = a[j+1];
+    a[j+1] = tmp;
+   }
+  }
+ }
+}
+
+void main ()
+{
+ int[] arr = new int[5];
+ arr[0]=5;
+ arr[1]=3;
+ arr[2]=1;
+ arr[3]=0;
+ arr[4]=2;
+ print_arr(arr);
+ print ("---");
+ bubblesort(arr);
+ print_arr(arr);
+}

@@ -1,0 +1,9 @@
+use stdlib;
+use uilib;
+
+void main()
+{
+ string s = editform("title", "OK", "Cancel", "text", 64, TextField.ANY);
+ if (s != null)
+  print (s + "\n");
+}

@@ -1,0 +1,17 @@
+use stdlib;
+use utillib;
+
+
+
+void main ()
+{
+ string str="hallo";
+ Vector v=new Vector();
+ v.add((Object)str);
+ v.set((Object)"hello", 0);
+ v.insert((Object)"world's", 0);
+ v.insert((Object)"hello2", 1);
+  for(int i=0; i<v.size(); i++)
+   println((string)v.get(i));
+ println("size: "+v.size());
+}

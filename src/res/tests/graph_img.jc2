@@ -1,0 +1,31 @@
+use graphlib;
+use stdlib;
+
+void main ()
+{
+  Canvas canvas = new Canvas ();
+  canvas.fullscreen(true);
+  canvas.show ();
+  Graphics g=canvas.getGraphics();;
+  int w = canvas.getWidth ();
+  int h = canvas.getHeight ();
+
+  Image bg = new Image("/res/tests/forest.png");
+  int x = 0;
+  int imgw = bg.getWidth();
+
+  while (canvas.getKeyStates()==0)
+  {
+    x--;
+    g.setColor (0x000000);
+    g.fillRect (0, 0, w, h);
+    g.setColor (0xff0000);
+    g.drawImage (bg, x, h, Graphics.LEFT|Graphics.BOTTOM);
+    g.drawImage (bg, x+imgw, h, Graphics.LEFT|Graphics.BOTTOM);
+    if (x <= -imgw)
+     x = 0;
+    canvas.repaint ();
+    yield();
+  }
+  print ("end");
+}

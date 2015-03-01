@@ -1,0 +1,9 @@
+use stdlib;
+
+void main ()
+{
+ int[][] a = new int[2][3];
+ a[0][1] = 6;
+ int b = a[0][1];
+ print ("b=" + b + ", a[0][1]=" + a[0][1]);
+}

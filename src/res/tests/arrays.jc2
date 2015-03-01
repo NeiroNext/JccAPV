@@ -1,0 +1,27 @@
+use stdlib;
+
+int[] copy(int num, int cnt)
+{
+ int[] arr=new int[cnt];
+ int i=0;
+ while(i<cnt)
+ {
+   arr[i] = num;
+   i=i+1;
+ }
+ return arr;
+}
+
+void main ()
+{
+ string[] as;
+ as = new string[2];
+ as[0] = "Hello,";
+ as[1] = "World!";
+ print (as[0] + as[1]);
+
+ as = new string[3];
+
+ int[] ai = copy(1, 5);
+ print ("" + ai[1]);
+}

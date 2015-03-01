@@ -1,0 +1,18 @@
+use graphlib;
+
+void main ()
+{
+  Canvas canvas = new Canvas ();
+  canvas.fullscreen(true);
+  canvas.show ();
+  Graphics g=canvas.getGraphics();
+  int w = canvas.getWidth ();
+  int h = canvas.getHeight ();	
+  g.drawM3G("/1.m3g",0,0,w,h);
+  canvas.repaint();
+  sleep(2000);
+  g.drawM3G("/2.m3g",50,50,w-100,h-100);
+  canvas.repaint();
+  sleep(2000);
+  println ("end");
+}

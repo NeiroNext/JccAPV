@@ -1,0 +1,102 @@
+use stdlib;
+use graphlib;
+use filelib;
+use iolib;
+use uilib;
+
+
+int cur;
+int w;
+int h;
+bool edit;
+bool save;
+
+string myToHex(int num){
+ string ret=toHex(num);
+  if(ret.length()<2)
+   ret="0"+ret;
+ return ret;
+}
+
+
+
+
+void key(int k){
+ if(k == 50 && cur>w)
+  cur-=w;
+ if(k == 56 && cur<w*h-w)
+  cur+=w;
+ if(k == 52 && cur%w>0)
+  cur--;
+ if(k == 54 && cur%w<w-1)
+  cur++;
+ if(k == 53)
+  edit=true;
+ if(k == 35)
+  save=true;
+}
+
+
+
+
+void main ()
+{
+ //File f=fileOpen("/c:/other/icon.png", File.READ);
+ //InputStream is=f.openInputStream();
+ InputStream is=openInputStream("/res/icon.png");
+ ByteEdit be=new ByteEdit(is);
+ Canvas c=new Canvas();
+ Graphics g=c.getGraphics();
+ int fw=g.stringWidth("0");
+ int fh=g.stringHeight();
+ w=c.getWidth()/fw/3;
+ h=c.getHeight()/fh;
+ cur=0;
+ edit=false;
+ save=false;
+ int pos=0;
+ int from=0;
+ int to=w*h;
+ int[] show=be.get(from, to);
+ 
+ 
+ //------
+ c.show();
+ while(c.getKey() != 48 && save==false){
+ g.setColor(200, 200, 200);
+ g.cls();
+  for(int ih=0; ih<h; ih++)
+   for(int iw=0; iw<w; iw++){
+    if(cur != iw+ih*w)
+     g.setColor(0);
+    else{
+     g.setColor(60, 60, 60);
+     g.fillRect(cur%w*fw*3, cur/w*fh, fw*3, fh);
+     g.setColor(255, 255, 255);
+    }
+    pos=iw+ih*w;
+    if(pos<show.length)
+     g.drawString(myToHex(show[pos]), iw*fw*3, ih*fh, 20);
+   }
+   c.repaint();
+   key(c.getKey());
+    if(edit){
+     c.releaseKey();
+     string tostr=editform("ByteEdit", "OK", "Cancel", myToHex(show[cur]), 2, 0);
+      if(tostr != null)
+       show[cur] = fromHex(tostr);
+     edit = false;
+    }
+   sleep(100);
+ }
+ 
+// save
+if(save){
+ File f=fileOpen("/c:/other/icon.png", File.WRITE);
+ OutputStream os=f.openOutputStream();
+ be.set(show, 0, show.length);
+ os.writeByteArray(be.getAll());
+ f.close();
+}
+ 
+}

@@ -1,0 +1,34 @@
+use stdlib;
+use medialib;
+use controllib;
+use iolib;
+use filelib;
+
+
+
+
+void main ()
+{
+ Player p=new Player();
+ File f=fileOpen("/c:/other/audio.amr", 2);
+ OutputStream os;
+ os=f.openOutputStream();
+ p.open("capture://audio");
+ p.realize();
+ RecordControl rc=new RecordControl();
+ p.getControl(rc);
+ rc.setRecordStream(os);
+ rc.startRecord();
+ p.start();
+ sleep(3000);
+ rc.stopRecord();
+ p.stop();
+ sleep(1000);
+ p.start();
+ rc.startRecord();
+ sleep(5000);
+ rc.commit();
+ p.close();
+ os.flush();
+ f.close();
+}

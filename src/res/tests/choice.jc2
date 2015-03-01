@@ -1,0 +1,23 @@
+use stdlib;
+use uilib;
+
+void main()
+{
+  string[] menu = {"exclusive", "multiple"};
+  int mode = selectform ("Menu", "OK", "Cancel", menu);
+  if (mode == -1)
+   return;
+  else if (mode == 0)
+  {
+   string[] list = {"select1", "select2"};
+   int n = choiceform("Exclusive", "OK", "Cancel", list);
+   print ("" + n + " selected\n");
+  }
+  else if (mode == 1)
+  {
+   string[] list = {"option1", "option2", "option3"};
+   bool[] selection = mulchoiceform("select an option", "OK", "Cancel", list);
+   for (int i = 0; i < selection.length; i++)
+    print(list[i] + ": " + ((selection[i])?"on\n":"off\n"));
+  }
+}
