@@ -25,4 +25,6 @@ proguard/
 # Log Files
 *.log
 
+# Project settings and bad CF bla-bla-bla for unix or my now git settings
 gradlew.bat
+.idea/
